@@ -1,1 +1,43 @@
-{}
+{
+  "api": {
+    "personalWebsiteApis": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "TestAPI"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "TestAPI": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_TestAPI_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TestAPI"
+        }
+      ]
+    },
+    "AMPLIFY_function_TestAPI_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "TestAPI"
+        }
+      ]
+    }
+  }
+}
