@@ -28,11 +28,14 @@
       "function": {
         "TestAPI": {
           "deploymentBucketName": "amplify-personalwebsite-dev-130800-deployment",
-          "s3Key": "amplify-builds/TestAPI-36614d62767747696e30-build.zip"
+          "s3Key": "amplify-builds/TestAPI-54505a356d4630743973-build.zip"
         }
       },
       "api": {
         "personalWebsiteApis": {}
+      },
+      "auth": {
+        "personalwebsite624fd9d3": {}
       }
     }
   }
