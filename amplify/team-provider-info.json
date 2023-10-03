@@ -23,6 +23,20 @@
       "StackName": "amplify-personalwebsite-dev-130800",
       "StackId": "arn:aws:cloudformation:us-west-1:876846342550:stack/amplify-personalwebsite-dev-130800/8f5e65c0-5d71-11ee-acf4-065f25884c33",
       "AmplifyAppId": "d2bo407bng6ga"
+    },
+    "categories": {
+      "function": {
+        "TestAPI": {
+          "deploymentBucketName": "amplify-personalwebsite-dev-130800-deployment",
+          "s3Key": "amplify-builds/TestAPI-54505a356d4630743973-build.zip"
+        }
+      },
+      "api": {
+        "personalWebsiteApis": {}
+      },
+      "auth": {
+        "personalwebsite624fd9d3": {}
+      }
     }
   }
 }

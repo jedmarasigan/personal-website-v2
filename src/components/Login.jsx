@@ -5,10 +5,14 @@ import ClassicHeader from "./ClassicHeader";
 import PreLoader from "./Preloader";
 import {
   MDBContainer,
-  MDBInput,
-  MDBBtn,
+  MDBInput
 }
 from 'mdb-react-ui-kit';
+
+import { Amplify, Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+const personalWebAPI = "personalWebsiteApis";
+const path = "/test";
 
 const Login = () => {
   const darkTheme = commonConfig.darkTheme;
@@ -16,9 +20,12 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const classicHeader = commonConfig.classicHeader;
   const [isLoading, setisLoading] = useState(true);
+  const navigate = useNavigate();
+
   const handleNavClick = (section) => {
     document.getElementById(section).scrollIntoView({ behavior: "smooth" });
   };
+
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setisLoading(false);
@@ -27,22 +34,33 @@ const Login = () => {
       clearTimeout(loadingTimeout);
     };
   }, []);
-  const handleOnSubmit = (e) => {
+
+  // function testAPICall(username, password){
+  //   API.get(
+  //     personalWebAPI,
+  //     path + "/" + username
+  //   ).then(
+  //     response => {
+  //       console.log(response);
+  //     }
+  //   ).catch(
+  //     error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // };
+
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(username)
-    console.log(password)
+    // testAPICall(username, password);
+    try {
+      await Auth.signIn(username, password);
+      navigate("/todolist");
+    } catch (error) {
+      console.log('there was an error logging in', error);
+    }
   }
 
-  // const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
-  // const users = [{ username: "Jed", password: "testpassword" }];
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   const account = users.find((user) => user.username === username);
-  //   if (account && account.password === password) {
-  //       setauthenticated(true)
-  //       localStorage.setItem("authenticated", true);
-  //   }
-  // };
   return (
     <div
       style={{ position: "absolute", height: "100%", width: "100%" }}
