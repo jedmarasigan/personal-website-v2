@@ -10,7 +10,7 @@ exports.handler = async (event) => {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*"
         },
-        body: JSON.stringify(event),
+        body: JSON.stringify(event.pathParameters),
     };
     return response;
 };

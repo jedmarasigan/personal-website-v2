@@ -16,14 +16,32 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import Disclaimer from "./components/Disclaimer";
 import PreLoader from "./components/Preloader";
 import { Tooltip } from "./components/Tooltip";
+import { Amplify, API, Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const classicHeader = commonConfig.classicHeader;
   const darkTheme = commonConfig.darkTheme;
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    AssessLoggedInState()
+  }, [])
 
   const handleNavClick = (section) => {
     document.getElementById(section).scrollIntoView({ behavior: "smooth" });
   };
+
+  const AssessLoggedInState = () => {
+    Auth.currentAuthenticatedUser()
+    .then(() => {
+      setLoggedIn(true)
+    })
+    .catch(() => {
+      setLoggedIn(false)
+    })
+  }
 
   const [scrollTopVisible, setScrollTopVisible] = useState(false);
   const [isLoading, setisLoading] = useState(true);
@@ -64,9 +82,9 @@ function App() {
         {isLoading && <PreLoader></PreLoader>}
         <div id="main-wrapper">
           {classicHeader ? (
-            <ClassicHeader handleNavClick={handleNavClick}></ClassicHeader>
+            <ClassicHeader handleNavClick={handleNavClick} loggedIn = {loggedIn} setLoggedIn={setLoggedIn}></ClassicHeader>
           ) : (
-            <Header handleNavClick={handleNavClick}></Header>
+            <Header handleNavClick={handleNavClick} loggedIn = {loggedIn} setLoggedIn={setLoggedIn}></Header>
           )}
 
           <div id="content" role="main">

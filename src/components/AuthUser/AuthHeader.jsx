@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Tooltip } from "./Tooltip";
+import { Tooltip } from "../Tooltip";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
-import { Amplify, Auth } from "aws-amplify";
 
-const Header = ({ classicHeader, darkTheme, homeRef, handleNavClick, activeClass, loggedIn, setLoggedIn }) => {
+import { Amplify, Auth } from "aws-amplify";
+import awsconfig from '../../aws-exports';
+import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+
+Amplify.configure(awsconfig);
+
+const AuthHeader = ({ classicHeader, darkTheme, homeRef, handleNavClick, activeClass, setLoggedIn }) => {
   const [isNavModalClose, setIsNavModalClose] = useState(true);
   const navigate = useNavigate();
   const signOut = async() =>{
@@ -16,6 +21,7 @@ const Header = ({ classicHeader, darkTheme, homeRef, handleNavClick, activeClass
         console.log('there was an error signing out ', error);
     }
   }
+
   return (
     <header id="header" className="sticky-top">
       {/* Navbar */}
@@ -56,103 +62,19 @@ const Header = ({ classicHeader, darkTheme, homeRef, handleNavClick, activeClass
           >
             <ul className="navbar-nav text-lg-center my-lg-auto py-lg-3">
               <li className="nav-item">
-                <Link
-                  target={homeRef}
-                  className="nav-link "
-                  smooth
-                  duration={500}
-                  style={{ cursor: "pointer" }}
-                  activeClass="active"
-                  spy
-                  to="home"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsNavModalClose(true);
-                    navigate("/")
-                  }}
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  smooth
-                  duration={500}
-                  style={{ cursor: "pointer" }}
-                  activeClass="active"
-                  spy
-                  to="about"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsNavModalClose(true);
-                    navigate("/")
-                  }}
-                >
-                  About Me
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  smooth
-                  duration={500}
-                  style={{ cursor: "pointer" }}
-                  activeClass="active"
-                  spy
-                  to="services"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsNavModalClose(true);
-                    navigate("/")
-                  }}
-                >
-                  What I Do
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  smooth
-                  duration={500}
-                  style={{ cursor: "pointer" }}
-                  activeClass="active"
-                  spy
-                  to="resume"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsNavModalClose(true);
-                    navigate("/")
-                  }}
-                >
-                  Resume
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  smooth
-                  duration={500}
-                  style={{ cursor: "pointer" }}
-                  activeClass="active"
-                  spy
-                  to="contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsNavModalClose(true);
-                    navigate("/")
-                  }}
-                >
-                  Contact
-                </Link>
-              </li>
-              <li className="nav-item">
-                  <Link className={"nav-link " + activeClass} style={{ cursor: "pointer" }} spy to="login"
+                  <Link
+                    className={"nav-link "}
+                    style={{ cursor: "pointer" }}
+                    spy
+                    to="signout"
                     onClick={(e) => {
                       e.preventDefault();
                       setIsNavModalClose(true);
-                      navigate("/login")
-                    }}>Login</Link>
+                      signOut();
+                    }}
+                  >
+                    Sign Out
+                  </Link>
                 </li>
             </ul>
           </div>
@@ -201,4 +123,4 @@ const Header = ({ classicHeader, darkTheme, homeRef, handleNavClick, activeClass
   );
 };
 
-export default Header;
+export default withAuthenticator(AuthHeader);
