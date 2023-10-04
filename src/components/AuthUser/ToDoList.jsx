@@ -85,4 +85,4 @@ const ToDoList = () => {
     )
   };
   
-  export default withAuthenticator(ToDoList);
+  export default ToDoList;
