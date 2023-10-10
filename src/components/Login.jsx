@@ -11,8 +11,6 @@ from 'mdb-react-ui-kit';
 
 import { Amplify, Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
-const personalWebAPI = "personalWebsiteApis";
-const path = "/test";
 
 const Login = () => {
   const darkTheme = commonConfig.darkTheme;
@@ -35,24 +33,8 @@ const Login = () => {
     };
   }, []);
 
-  // function testAPICall(username, password){
-  //   API.get(
-  //     personalWebAPI,
-  //     path + "/" + username
-  //   ).then(
-  //     response => {
-  //       console.log(response);
-  //     }
-  //   ).catch(
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // };
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    // testAPICall(username, password);
     try {
       await Auth.signIn(username, password);
       navigate("/todolist");

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "personalwebsite",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authpersonalwebsite624fd9d3"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 1,
+        "apiKeyExpirationDate": "2023-10-06T23:38:42.141Z",
+        "keyDescription": "personalwebsiteAPIKey"
+      }
+    ],
+    "conflictResolution": {}
+  }
+}
