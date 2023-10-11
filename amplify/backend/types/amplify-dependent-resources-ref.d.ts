@@ -1,9 +1,9 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "personalWebsiteApis": {
-      "ApiId": "string",
-      "ApiName": "string",
-      "RootUrl": "string"
+    "personalwebsite": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string",
+      "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
@@ -15,15 +15,6 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
-    }
-  },
-  "function": {
-    "TestAPI": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
     }
   }
 }

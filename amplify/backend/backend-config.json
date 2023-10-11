@@ -1,18 +1,37 @@
 {
   "api": {
-    "personalWebsiteApis": {
+    "personalwebsite": {
       "dependsOn": [
         {
           "attributes": [
-            "Name",
-            "Arn"
+            "UserPoolId"
           ],
-          "category": "function",
-          "resourceName": "TestAPI"
+          "category": "auth",
+          "resourceName": "personalwebsite624fd9d3"
         }
       ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2023-10-18T21:54:22.548Z",
+                "apiKeyExpirationDays": 7,
+                "description": "testapikey"
+              },
+              "authenticationType": "API_KEY"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authpersonalwebsite624fd9d3"
+            }
+          }
+        }
+      },
       "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
+      "service": "AppSync"
     }
   },
   "auth": {
@@ -43,30 +62,6 @@
       "service": "Cognito"
     }
   },
-  "function": {
-    "TestAPI": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_TestAPI_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "TestAPI"
-        }
-      ]
-    },
-    "AMPLIFY_function_TestAPI_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "TestAPI"
-        }
-      ]
-    }
-  },
+  "function": {},
   "storage": {}
 }

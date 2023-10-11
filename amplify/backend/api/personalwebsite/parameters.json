@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "personalwebsite",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authpersonalwebsite624fd9d3",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
