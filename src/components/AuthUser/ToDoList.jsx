@@ -25,18 +25,20 @@ const ToDoList = () => {
 
     const fetchTodoList = async () => {
       try {
-        const todolistData = await API.graphql(graphqlOperation(listTodos, { authMode: 'AMAZON_COGNITO_USER_POOLS'}));
+        const todolistData = await API.graphql({ query: listTodos, authMode: "API_KEY"});
+        //console.log("Todolist data: ", todolistData);
         const todoList = todolistData.data.listTodos.items;
+        //console.log("Fetched to do list: ", todoList);
         //For testing purposes
-        let newToDo = {
-          id: uuidv4(),
-          name: "groceries",
-          description: "eggs,mayo,tuna",
-          owner: "Jed Marasigan",
-          complete: false,
-          active: true
-        };
-        todoList.push(newToDo)
+        // let newToDo = {
+        //   id: uuidv4(),
+        //   name: "groceries",
+        //   description: "eggs,mayo,tuna",
+        //   owner: "Jed Marasigan",
+        //   complete: false,
+        //   active: true
+        // };
+        // todoList.push(newToDo)
         ///////////////////////////////////////////////////////////////////
         setToDoList(todoList);
       } catch (error) {
@@ -70,7 +72,6 @@ const ToDoList = () => {
     }
 
     const deleteItem = async (id) => {
-      console.log(id);
       try {
         setToDoList((prevList) => {
           const updatedList = prevList.filter((toDoItem) => toDoItem.id !== id);
@@ -92,14 +93,13 @@ const ToDoList = () => {
           return;
         }else{
           let newToDo = {
-            id: uuidv4(),
             name: formJson.name,
             description: formJson.description,
             owner: "Jed Marasigan",
-            complete: false,
+            completed: false,
             active: true
           };
-          // await API.graphql({ query: createTodo, variables: {input: newToDo}, authMode: "AMAZON_COGNITO_USER_POOLS" });
+          await API.graphql({ query: createTodo, variables: {input: newToDo}, authMode: "API_KEY"});
           setToDoList((prevList) => {
             const updatedList = [
               newToDo,
@@ -114,10 +114,7 @@ const ToDoList = () => {
     }
   
     return (
-      <div
-        style={{ position: "absolute", height: "100%", width: "100%" }}
-        className={classicHeader ? "" : "side-header"}
-      >
+      <div className={classicHeader ? "" : "side-header"}>
         {isLoading && <PreLoader></PreLoader>}
         <div id="main-wrapper" style={{ height: "100%" }}>
           {classicHeader ? (
@@ -149,7 +146,7 @@ const ToDoList = () => {
               </div>
               {/* Heading end*/}
             </div>
-            <section>
+            <section className="section">
               <div className="container">
                 <div className="row justify-content-center align-items-center h-100">
                   <div className="col-12 col-lg-9 col-xl-7">
@@ -181,15 +178,11 @@ const ToDoList = () => {
               <br></br>
               <br></br>
               <div className="todoList">
-                <div className="row justify-content-center align-items-center h-100">
+                <div className="row justify-content-center align-items-center">
                   <div className="col-12 col-lg-9 col-xl-7">
                     <ul className="list-group list-group-light">
-                      {/* <li className="list-group-item" key="1">groceries: egg, tuna, mayo
-                        <a className="delete-button" role="button" onClick={() => deleteItem(1)}>
-                          <i className="fas fa-trash-can"></i>
-                        </a>
-                      </li> */}
                       {todos.map(todo => {
+                        console.log("Todo: ", todo)
                         return (
                           <li className="list-group-item" key={todo.id}>{todo.name}: {todo.description}
                             <a className="delete-button" role="button" onClick={() => deleteItem(todo.id)}>

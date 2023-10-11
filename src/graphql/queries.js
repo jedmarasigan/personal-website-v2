@@ -7,8 +7,8 @@ export const getTodo = /* GraphQL */ `
       id
       name
       description
-      complete
       active
+      completed
       owner
       createdAt
       updatedAt
@@ -27,8 +27,8 @@ export const listTodos = /* GraphQL */ `
         id
         name
         description
-        complete
         active
+        completed
         owner
         createdAt
         updatedAt

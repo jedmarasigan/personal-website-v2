@@ -15,9 +15,9 @@
           "additionalAuthenticationProviders": [
             {
               "apiKeyConfig": {
-                "apiKeyExpirationDate": "2023-10-06T23:38:42.141Z",
-                "apiKeyExpirationDays": 1,
-                "description": "personalwebsiteAPIKey"
+                "apiKeyExpirationDate": "2023-10-18T21:54:22.548Z",
+                "apiKeyExpirationDays": 7,
+                "description": "testapikey"
               },
               "authenticationType": "API_KEY"
             }
